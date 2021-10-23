@@ -37,5 +37,19 @@ namespace SnakesAndLaddersTests
 
             Assert.Collection(Board.Players, p => Assert.Equal(player, p));
         }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(5)]
+        [InlineData(10)]
+        [InlineData(66)]
+        [InlineData(100)]
+        public void BoardReturnsCorrectFieldBasedOnNumber(int fieldNo)
+        {
+            IField field = Board.GetField(fieldNo);
+
+            Assert.Equal(fieldNo, field.FieldNumber);
+        }
     }
 }

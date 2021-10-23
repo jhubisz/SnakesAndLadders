@@ -1,6 +1,7 @@
 ﻿using SnakesAndLadders.Fields;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SnakesAndLadders
 {
@@ -35,6 +36,11 @@ namespace SnakesAndLadders
                 Players = new List<Player>();
 
             Players.Add(player);
+        }
+
+        public IField GetField(int fieldNo)
+        {
+            return Fields.FirstOrDefault(i => i.FieldNumber == fieldNo);
         }
     }
 }
