@@ -12,5 +12,13 @@ namespace SnakesAndLaddersTests
 
             Assert.IsAssignableFrom<IField>(field);
         }
+
+        [Fact]
+        public void FieldHasNumberIdentifier()
+        {
+            var field = new EmptyField();
+
+            Assert.Equal(0, field.FieldNumber);
+        }
     }
 }

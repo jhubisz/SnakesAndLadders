@@ -2,6 +2,7 @@
 {
     public interface IField
     {
+        int FieldNumber { get; }
         bool ValidateOutcome();
     }
 }
