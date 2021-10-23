@@ -1,4 +1,5 @@
 using SnakesAndLadders;
+using SnakesAndLadders.Fields;
 using Xunit;
 
 namespace SnakesAndLaddersTests
@@ -13,6 +14,14 @@ namespace SnakesAndLaddersTests
             var board = new Board(NO_OF_FIELDS);
 
             Assert.Equal(NO_OF_FIELDS, board.Fields.Count);
+        }
+
+        [Fact]
+        public void BoardHasFieldsInFieldsCollection()
+        {
+            var board = new Board();
+
+            Assert.All(board.Fields, f => Assert.IsAssignableFrom<IField>(f));
         }
     }
 }
