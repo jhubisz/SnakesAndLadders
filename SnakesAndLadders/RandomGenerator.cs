@@ -14,7 +14,7 @@ namespace SnakesAndLadders
 
         public int Next(int length)
         {
-            return Random.Next(length);
+            return Random.Next(1, length);
         }
     }
 }

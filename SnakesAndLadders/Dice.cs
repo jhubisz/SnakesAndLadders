@@ -4,16 +4,18 @@ namespace SnakesAndLadders
 {
     public class Dice : IDice
     {
-        public IRandomGenerator RandomGenerator { get; }
+        private int NumberOfSides { get; }
+        private IRandomGenerator RandomGenerator { get; }
 
-        public Dice(IRandomGenerator randomGenerator)
+        public Dice(int numberOfSides, IRandomGenerator randomGenerator)
         {
+            NumberOfSides = numberOfSides;
             RandomGenerator = randomGenerator;
         }
 
         public int RollTheDice()
         {
-            return 1;
+            return RandomGenerator.Next(NumberOfSides);
         }
     }
 }

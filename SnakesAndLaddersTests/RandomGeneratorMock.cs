@@ -17,7 +17,7 @@ namespace SnakesAndLaddersTests
             var currentNumber = returnNumbers[index];
             index = ++index >= returnNumbers.Length ? 0 : index;
 
-            return currentNumber >= length ? length - 1 : currentNumber;
+            return currentNumber > length ? length : currentNumber;
         }
     }
 }
