@@ -23,7 +23,7 @@ namespace SnakesAndLadders
             Fields = new List<IField>();
             for (int i = 1; i <= noOfField; i++)
             {
-                Fields.Add(new EmptyField());
+                Fields.Add(new EmptyField(i));
             }
         }
     }

@@ -8,17 +8,19 @@ namespace SnakesAndLaddersTests
         [Fact]
         public void FieldIsOfTypeIField()
         {
-            var field = new EmptyField();
+            var field = new EmptyField(0);
 
             Assert.IsAssignableFrom<IField>(field);
         }
 
         [Fact]
-        public void FieldHasNumberIdentifier()
+        public void FieldHasNumberIdentifierSpecifiedInConstructor()
         {
-            var field = new EmptyField();
+            const int FIELD_NUMBER = 1;
 
-            Assert.Equal(0, field.FieldNumber);
+            var field = new EmptyField(FIELD_NUMBER);
+
+            Assert.Equal(FIELD_NUMBER, field.FieldNumber);
         }
     }
 }
