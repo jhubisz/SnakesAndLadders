@@ -1,4 +1,5 @@
 ﻿using SnakesAndLadders.Fields;
+using SnakesAndLadders.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,14 +12,27 @@ namespace SnakesAndLadders
 
         public List<IField> Fields { get; set; }
         public Dictionary<Player, IField> Players { get; set; }
+        public IDice Dice { get; }
+        public Player currentTurnPlayer;
+        public Player CurrentTurnPlayer
+        {
+            get
+            {
+                if (currentTurnPlayer == null)
+                    currentTurnPlayer = Players.First().Key;
 
-        public Board()
-            : this(NO_OF_FIELDS)
+                return currentTurnPlayer;
+            }
+        }
+
+        public Board(IDice dice)
+            : this(NO_OF_FIELDS, dice)
         {
         }
-        public Board(int noOfField)
+        public Board(int noOfField, IDice dice)
         {
             InitializeBoard(noOfField);
+            Dice = dice;
         }
 
         private void InitializeBoard(int noOfField)
@@ -41,6 +55,14 @@ namespace SnakesAndLadders
         public IField GetField(int fieldNo)
         {
             return Fields.FirstOrDefault(i => i.FieldNumber == fieldNo);
+        }
+
+        public void MovePlayer()
+        {
+            var diceRoll = Dice.RollTheDice();
+            var targetFieldNumber = Players[CurrentTurnPlayer].FieldNumber + diceRoll;
+            var targetField = GetField(targetFieldNumber);
+            Players[CurrentTurnPlayer] = targetField;
         }
     }
 }

@@ -6,14 +6,30 @@ namespace SnakesAndLaddersTests
 {
     public class BoardTests
     {
-        const int NO_OF_FIELDS = 100;
-        const int FIRST_FIELD = 1;
+        private const int NO_OF_FIELDS = 100;
+        private const int FIRST_FIELD = 1;
+        private const int DICE_NUMBER_OF_SIDES = 6;
 
         public Board Board { get; set; }
 
         public BoardTests()
         {
-            Board = new Board(NO_OF_FIELDS);
+            var randomThrows = new int[] { 6 };
+            InitializeBoard(randomThrows);
+        }
+
+        private void InitializeBoard(int[] randomThrows)
+        {
+            var randomGenerator = new RandomGeneratorMock(randomThrows);
+            var dice = new Dice(DICE_NUMBER_OF_SIDES, randomGenerator);
+
+            Board = new Board(NO_OF_FIELDS, dice);
+        }
+        private Player AddPlayerToBoard(string playerName)
+        {
+            var player = new Player(playerName);
+            Board.AddPlayer(player);
+            return player;
         }
 
         [Fact]
@@ -32,9 +48,7 @@ namespace SnakesAndLaddersTests
         public void BoardAllowsForAddingAPlayer()
         {
             var playerName = "Name";
-            var player = new Player(playerName);
-
-            Board.AddPlayer(player);
+            var player = AddPlayerToBoard(playerName);
 
             Assert.Collection(Board.Players, p => Assert.Equal(player, p.Key));
         }
@@ -56,13 +70,22 @@ namespace SnakesAndLaddersTests
         [Fact]
         public void BoardSetsInitialPlayerPositionCorrectly()
         {
-            var playerName = "Name";
-            var player = new Player(playerName);
             var firstField = Board.GetField(FIRST_FIELD);
-
-            Board.AddPlayer(player);
+            var player = AddPlayerToBoard("Name");
 
             Assert.Equal(firstField, Board.Players[player]);
+        }
+
+        [Fact]
+        public void BoardChangesPlayerPositionBasedOnDiceThrow()
+        {
+            var randomThrows = new int[] { 6 };
+            InitializeBoard(randomThrows);
+            Player player = AddPlayerToBoard("Name");
+
+            Board.MovePlayer();
+
+            Assert.Equal(FIRST_FIELD + randomThrows[0], Board.Players[player].FieldNumber);
         }
     }
 }
