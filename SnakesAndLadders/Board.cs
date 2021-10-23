@@ -1,4 +1,5 @@
 ﻿using SnakesAndLadders.Fields;
+using System;
 using System.Collections.Generic;
 
 namespace SnakesAndLadders
@@ -8,6 +9,7 @@ namespace SnakesAndLadders
         private const int NO_OF_FIELDS = 100;
 
         public List<IField> Fields { get; set; }
+        public List<Player> Players { get; set; }
 
         public Board()
             : this(NO_OF_FIELDS)
@@ -25,6 +27,14 @@ namespace SnakesAndLadders
             {
                 Fields.Add(new EmptyField(i));
             }
+        }
+
+        public void AddPlayer(Player player)
+        {
+            if (Players == null)
+                Players = new List<Player>();
+
+            Players.Add(player);
         }
     }
 }

@@ -26,5 +26,16 @@ namespace SnakesAndLaddersTests
         {
             Assert.All(Board.Fields, f => Assert.IsAssignableFrom<IField>(f));
         }
+
+        [Fact]
+        public void BoardAllowsForAddingAPlayer()
+        {
+            var playerName = "Name";
+            var player = new Player(playerName);
+
+            Board.AddPlayer(player);
+
+            Assert.Collection(Board.Players, p => Assert.Equal(player, p));
+        }
     }
 }
