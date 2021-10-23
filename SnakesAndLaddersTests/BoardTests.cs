@@ -7,6 +7,7 @@ namespace SnakesAndLaddersTests
     public class BoardTests
     {
         const int NO_OF_FIELDS = 100;
+        const int FIRST_FIELD = 1;
 
         public Board Board { get; set; }
 
@@ -35,7 +36,7 @@ namespace SnakesAndLaddersTests
 
             Board.AddPlayer(player);
 
-            Assert.Collection(Board.Players, p => Assert.Equal(player, p));
+            Assert.Collection(Board.Players, p => Assert.Equal(player, p.Key));
         }
 
         [Theory]
@@ -50,6 +51,18 @@ namespace SnakesAndLaddersTests
             IField field = Board.GetField(fieldNo);
 
             Assert.Equal(fieldNo, field.FieldNumber);
+        }
+
+        [Fact]
+        public void BoardSetsInitialPlayerPositionCorrectly()
+        {
+            var playerName = "Name";
+            var player = new Player(playerName);
+            var firstField = Board.GetField(FIRST_FIELD);
+
+            Board.AddPlayer(player);
+
+            Assert.Equal(firstField, Board.Players[player]);
         }
     }
 }
