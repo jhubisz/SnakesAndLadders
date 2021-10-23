@@ -1,4 +1,5 @@
 ﻿using SnakesAndLadders;
+using SnakesAndLadders.Interfaces;
 using Xunit;
 
 namespace SnakesAndLaddersTests

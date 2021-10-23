@@ -1,4 +1,6 @@
-﻿namespace SnakesAndLadders
+﻿using SnakesAndLadders.Interfaces;
+
+namespace SnakesAndLadders
 {
     public class Dice : IDice
     {
