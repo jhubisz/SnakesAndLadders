@@ -9,7 +9,8 @@ namespace SnakesAndLaddersTests
         [Fact]
         public void DiceIsCreatedAndOfTypeIDice()
         {
-            var dice = new Dice();
+            var randomGenerator = new RandomGeneratorMock(new int[] { 1 });
+            var dice = new Dice(randomGenerator);
 
             Assert.IsAssignableFrom<IDice>(dice);
         }
