@@ -5,10 +5,14 @@ namespace SnakesAndLaddersTests
 {
     public class BoardTests
     {
+        const int NO_OF_FIELDS = 100;
+
         [Fact]
-        public void BoardIsCreated()
-        {
-            var board = new Board();
+        public void BoardIsCreatedAndHasSpecifiedNoOfFields()
+        {    
+            var board = new Board(NO_OF_FIELDS);
+
+            Assert.Equal(NO_OF_FIELDS, board.Fields.Count);
         }
     }
 }
