@@ -8,20 +8,23 @@ namespace SnakesAndLaddersTests
     {
         const int NO_OF_FIELDS = 100;
 
+        public Board Board { get; set; }
+
+        public BoardTests()
+        {
+            Board = new Board(NO_OF_FIELDS);
+        }
+
         [Fact]
         public void BoardIsCreatedAndHasSpecifiedNoOfFields()
-        {    
-            var board = new Board(NO_OF_FIELDS);
-
-            Assert.Equal(NO_OF_FIELDS, board.Fields.Count);
+        {
+            Assert.Equal(NO_OF_FIELDS, Board.Fields.Count);
         }
 
         [Fact]
         public void BoardHasFieldsInFieldsCollection()
         {
-            var board = new Board();
-
-            Assert.All(board.Fields, f => Assert.IsAssignableFrom<IField>(f));
+            Assert.All(Board.Fields, f => Assert.IsAssignableFrom<IField>(f));
         }
     }
 }

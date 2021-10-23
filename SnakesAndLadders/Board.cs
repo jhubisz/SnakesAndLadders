@@ -1,5 +1,4 @@
 ﻿using SnakesAndLadders.Fields;
-using System;
 using System.Collections.Generic;
 
 namespace SnakesAndLadders
@@ -10,7 +9,7 @@ namespace SnakesAndLadders
 
         public List<IField> Fields { get; set; }
 
-        public Board() 
+        public Board()
             : this(NO_OF_FIELDS)
         {
         }
