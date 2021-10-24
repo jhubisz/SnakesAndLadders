@@ -1,5 +1,6 @@
 using SnakesAndLadders;
 using SnakesAndLadders.Fields;
+using SnakesAndLaddersTests.Mocks;
 using Xunit;
 
 namespace SnakesAndLaddersTests
@@ -22,8 +23,9 @@ namespace SnakesAndLaddersTests
         {
             var randomGenerator = new RandomGeneratorMock(randomThrows);
             var dice = new Dice(DICE_NUMBER_OF_SIDES, randomGenerator);
+            var configuration = new FieldsConfigurationMock();
 
-            Board = new Board(NO_OF_FIELDS, MAX_PLAYERS, dice);
+            Board = new Board(NO_OF_FIELDS, MAX_PLAYERS, dice, configuration);
         }
 
         [Fact]
@@ -36,6 +38,24 @@ namespace SnakesAndLaddersTests
         public void BoardHasFieldsInFieldsCollection()
         {
             Assert.All(Board.Fields, f => Assert.IsAssignableFrom<IField>(f));
+        }
+
+        [Fact]
+        public void BoardHasLaddersBasedOnPassedInConfiguration()
+        {
+            int ladder1FieldNumber = 10;
+            int ladder2FieldNumber = 20;
+            Assert.IsAssignableFrom<LadderField>(Board.GetField(ladder1FieldNumber));
+            Assert.IsAssignableFrom<LadderField>(Board.GetField(ladder2FieldNumber));
+        }
+
+        [Fact]
+        public void BoardHasSnakesBasedOnPassedInConfiguration()
+        {
+            int snake1FieldNumber = 12;
+            int snake2FieldNumber = 50;
+            Assert.IsAssignableFrom<SnakeField>(Board.GetField(snake1FieldNumber));
+            Assert.IsAssignableFrom<SnakeField>(Board.GetField(snake2FieldNumber));
         }
     }
 }

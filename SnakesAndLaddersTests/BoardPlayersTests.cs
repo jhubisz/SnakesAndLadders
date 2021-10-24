@@ -1,5 +1,6 @@
 ﻿using SnakesAndLadders;
 using SnakesAndLadders.Fields;
+using SnakesAndLaddersTests.Mocks;
 using Xunit;
 
 namespace SnakesAndLaddersTests
@@ -23,8 +24,9 @@ namespace SnakesAndLaddersTests
         {
             var randomGenerator = new RandomGeneratorMock(randomThrows);
             var dice = new Dice(DICE_NUMBER_OF_SIDES, randomGenerator);
+            var configuration = new FieldsConfigurationMock();
 
-            Board = new Board(NO_OF_FIELDS, MAX_PLAYERS, dice);
+            Board = new Board(NO_OF_FIELDS, MAX_PLAYERS, dice, configuration);
         }
         private Player AddPlayerToBoard(string playerName)
         {
