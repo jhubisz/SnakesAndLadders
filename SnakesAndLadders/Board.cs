@@ -13,6 +13,7 @@ namespace SnakesAndLadders
         private const int MAX_PLAYERS = 10;
         private const int STARTING_FIELD = 1;
 
+        public int NumberOfField { get; }
         public int MaxPlayers { get; }
         public List<IField> Fields { get; set; }
         public Dictionary<Player, IField> Players { get; set; }
@@ -32,6 +33,7 @@ namespace SnakesAndLadders
         }
         public Board(int noOfField, int maxPlayers, IDice dice, FieldsConfigurationBase configuration)
         {
+            NumberOfField = noOfField;
             MaxPlayers = maxPlayers;
             Dice = dice;
             Configuration = configuration;
@@ -90,11 +92,29 @@ namespace SnakesAndLadders
         public void MovePlayer()
         {
             var diceRoll = Dice.RollTheDice();
+
+            var gameFinished = ValidateGameFinished(diceRoll);
+            if (gameFinished)
+                return;
+
             var targetFieldNumber = Players[CurrentTurnPlayer].FieldNumber + diceRoll;
             var targetField = GetField(targetFieldNumber);
 
             Players[CurrentTurnPlayer] = targetField.ValidateOutcome();
             playerCollection.NextPlayer();
+        }
+
+        private bool ValidateGameFinished(int diceRoll)
+        {
+            if (GameState == GameState.Finished) return true;
+
+            if (Players[CurrentTurnPlayer].FieldNumber + diceRoll >= NumberOfField)
+            {
+                GameState = GameState.Finished;
+                return true;
+            }
+
+            return false;
         }
     }
 }

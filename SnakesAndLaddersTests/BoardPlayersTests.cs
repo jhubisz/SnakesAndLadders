@@ -1,4 +1,5 @@
 ﻿using SnakesAndLadders;
+using SnakesAndLadders.Enums;
 using SnakesAndLadders.Fields;
 using SnakesAndLaddersTests.Mocks;
 using Xunit;
@@ -120,6 +121,21 @@ namespace SnakesAndLaddersTests
             Board.MovePlayer();
 
             Assert.Equal(targetFieldAfterTwoMoves, Board.Players[Board.CurrentTurnPlayer].FieldNumber);
+        }
+
+
+        [Fact]
+        public void GameStateIsChangedToFinishedAfterPlayerReachesFinalField()
+        {
+            var randomThrows = new int[] { 5, 4, 1 };
+            InitializeBoard(randomThrows);
+            AddPlayerToBoard("player");
+
+            Board.MovePlayer(); // moves to field 5
+            Board.MovePlayer(); // takes ladder from field 10 to 99
+            Board.MovePlayer(); // moves over final field
+
+            Assert.Equal(GameState.Finished, Board.GameState);
         }
     }
 }
