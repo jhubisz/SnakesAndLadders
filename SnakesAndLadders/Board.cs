@@ -24,6 +24,7 @@ namespace SnakesAndLadders
         {
             get => playerCollection.CurrentPlayer;
         }
+        public GameState GameState { get; private set; }
 
         public Board(IDice dice, FieldsConfiguration configuration)
             : this(NO_OF_FIELDS, MAX_PLAYERS, dice, configuration)

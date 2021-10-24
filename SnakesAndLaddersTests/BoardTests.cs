@@ -1,4 +1,5 @@
 using SnakesAndLadders;
+using SnakesAndLadders.Enums;
 using SnakesAndLadders.Fields;
 using SnakesAndLaddersTests.Mocks;
 using Xunit;
@@ -56,6 +57,12 @@ namespace SnakesAndLaddersTests
             int snake2FieldNumber = 50;
             Assert.IsAssignableFrom<SnakeField>(Board.GetField(snake1FieldNumber));
             Assert.IsAssignableFrom<SnakeField>(Board.GetField(snake2FieldNumber));
+        }
+
+        [Fact]
+        public void BoardHoldsCorrectGameStateAfterInitialization()
+        {
+            Assert.Equal(GameState.Ongoing, Board.GameState);
         }
     }
 }
