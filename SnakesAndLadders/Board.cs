@@ -10,7 +10,7 @@ namespace SnakesAndLadders
         private const int NO_OF_FIELDS = 100;
         private const int MAX_PLAYERS = 10;
         private const int STARTING_FIELD = 1;
-        
+
         public int MaxPlayers { get; }
         public List<IField> Fields { get; set; }
         public Dictionary<Player, IField> Players { get; set; }

@@ -20,7 +20,8 @@ namespace SnakesAndLadders
             MaxPlayers = maxPlayers;
         }
 
-        public Player CurrentPlayer {
+        public Player CurrentPlayer
+        {
             get
             {
                 return players[currentPlayerIndex];
