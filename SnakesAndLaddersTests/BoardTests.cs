@@ -6,6 +6,7 @@ namespace SnakesAndLaddersTests
 {
     public class BoardTests
     {
+        private const int MAX_PLAYERS = 2;
         private const int NO_OF_FIELDS = 100;
         private const int FIRST_FIELD = 1;
         private const int DICE_NUMBER_OF_SIDES = 6;
@@ -23,7 +24,7 @@ namespace SnakesAndLaddersTests
             var randomGenerator = new RandomGeneratorMock(randomThrows);
             var dice = new Dice(DICE_NUMBER_OF_SIDES, randomGenerator);
 
-            Board = new Board(NO_OF_FIELDS, dice);
+            Board = new Board(NO_OF_FIELDS, MAX_PLAYERS, dice);
         }
         private Player AddPlayerToBoard(string playerName)
         {
@@ -81,11 +82,24 @@ namespace SnakesAndLaddersTests
         {
             var randomThrows = new int[] { 6 };
             InitializeBoard(randomThrows);
-            Player player = AddPlayerToBoard("Name");
+            var player = AddPlayerToBoard("Name");
 
             Board.MovePlayer();
 
             Assert.Equal(FIRST_FIELD + randomThrows[0], Board.Players[player].FieldNumber);
+        }
+
+        [Fact]
+        public void ChangesCurrentPlayerAfterMoveIsMade()
+        {
+            var randomThrows = new int[] { 6 };
+            InitializeBoard(randomThrows);
+            AddPlayerToBoard("Player 1");
+            var player2 = AddPlayerToBoard("Player 2");
+
+            Board.MovePlayer();
+
+            Assert.Equal(player2, Board.CurrentTurnPlayer);
         }
     }
 }
