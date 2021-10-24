@@ -11,7 +11,7 @@ namespace SnakesAndLadders.Fields.FieldsConfiguration
             FieldsCollection.Add((34, FieldType.Ladder, 62));
             FieldsCollection.Add((39, FieldType.Ladder, 82));
             FieldsCollection.Add((60, FieldType.Ladder, 91));
-            
+
             FieldsCollection.Add((99, FieldType.Snake, 11));
             FieldsCollection.Add((87, FieldType.Snake, 72));
             FieldsCollection.Add((66, FieldType.Snake, 52));

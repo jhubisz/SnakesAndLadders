@@ -123,7 +123,6 @@ namespace SnakesAndLaddersTests
             Assert.Equal(targetFieldAfterTwoMoves, Board.Players[Board.CurrentTurnPlayer].FieldNumber);
         }
 
-
         [Fact]
         public void GameStateIsChangedToFinishedAfterPlayerReachesFinalField()
         {
