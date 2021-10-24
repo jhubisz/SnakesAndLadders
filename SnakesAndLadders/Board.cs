@@ -26,6 +26,7 @@ namespace SnakesAndLadders
             get => playerCollection.CurrentPlayer;
         }
         public GameState GameState { get; private set; }
+        public Player Winner { get; private set; }
 
         public Board(IDice dice, FieldsConfiguration configuration)
             : this(NO_OF_FIELDS, MAX_PLAYERS, dice, configuration)
@@ -93,7 +94,7 @@ namespace SnakesAndLadders
         {
             var diceRoll = Dice.RollTheDice();
 
-            var gameFinished = ValidateGameFinished(diceRoll);
+            var gameFinished = ValidateGameFinished(diceRoll, CurrentTurnPlayer);
             if (gameFinished)
                 return;
 
@@ -104,13 +105,14 @@ namespace SnakesAndLadders
             playerCollection.NextPlayer();
         }
 
-        private bool ValidateGameFinished(int diceRoll)
+        private bool ValidateGameFinished(int diceRoll, Player player)
         {
             if (GameState == GameState.Finished) return true;
 
             if (Players[CurrentTurnPlayer].FieldNumber + diceRoll >= NumberOfField)
             {
                 GameState = GameState.Finished;
+                Winner = player;
                 return true;
             }
 

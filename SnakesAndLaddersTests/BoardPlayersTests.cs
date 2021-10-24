@@ -136,5 +136,19 @@ namespace SnakesAndLaddersTests
 
             Assert.Equal(GameState.Finished, Board.GameState);
         }
+
+        [Fact]
+        public void PlayerMakingFinalMoveIsRecordedAsWinner()
+        {
+            var randomThrows = new int[] { 6, 5, 6, 4, 6, 2 };
+            InitializeBoard(randomThrows);
+            AddPlayerToBoard("looser");
+            var winningPlayer = AddPlayerToBoard("winner");
+
+            foreach (var t in randomThrows)
+                Board.MovePlayer();
+
+            Assert.Equal(winningPlayer, Board.Winner);
+        }
     }
 }
