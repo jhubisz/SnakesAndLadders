@@ -1,22 +1,25 @@
 ﻿using SnakesAndLadders.Enums;
-using System;
 
 namespace SnakesAndLadders.Fields
 {
-    public class EmptyField : IField
+    public class SnakeField : IField
     {
         public int FieldNumber { get; private set; }
+
         public FieldType FieldType { get; private set; }
 
-        public EmptyField(int fieldNumber)
+        public IField TransferToField { get; private set; }
+
+        public SnakeField(int fieldNumber, IField transferToField)
         {
-            FieldType = FieldType.Regular;
+            FieldType = FieldType.Snake;
             FieldNumber = fieldNumber;
+            TransferToField = transferToField;
         }
 
         public IField ValidateOutcome()
         {
-            return this;
+            return TransferToField;
         }
     }
 }

@@ -1,8 +1,12 @@
-﻿namespace SnakesAndLadders.Fields
+﻿using SnakesAndLadders.Enums;
+
+namespace SnakesAndLadders.Fields
 {
     public interface IField
     {
         int FieldNumber { get; }
-        bool ValidateOutcome();
+        FieldType FieldType { get; }
+
+        IField ValidateOutcome();
     }
 }
