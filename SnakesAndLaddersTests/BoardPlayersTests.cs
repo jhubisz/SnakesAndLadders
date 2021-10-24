@@ -91,5 +91,35 @@ namespace SnakesAndLaddersTests
 
             Assert.Equal(player2, Board.CurrentTurnPlayer);
         }
+
+        [Fact]
+        public void PlayerIsMovedByLadder()
+        {
+            var randomThrows = new int[] { 5, 4 };
+            InitializeBoard(randomThrows);
+            AddPlayerToBoard("player");
+
+            var targetFieldAfterTwoMoves = 99;
+
+            Board.MovePlayer();
+            Board.MovePlayer();
+
+            Assert.Equal(targetFieldAfterTwoMoves, Board.Players[Board.CurrentTurnPlayer].FieldNumber);
+        }
+
+        [Fact]
+        public void PlayerIsMovedBySnake()
+        {
+            var randomThrows = new int[] { 6, 5 };
+            InitializeBoard(randomThrows);
+            AddPlayerToBoard("player");
+
+            var targetFieldAfterTwoMoves = 2;
+
+            Board.MovePlayer();
+            Board.MovePlayer();
+
+            Assert.Equal(targetFieldAfterTwoMoves, Board.Players[Board.CurrentTurnPlayer].FieldNumber);
+        }
     }
 }

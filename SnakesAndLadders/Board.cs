@@ -92,7 +92,7 @@ namespace SnakesAndLadders
             var targetFieldNumber = Players[CurrentTurnPlayer].FieldNumber + diceRoll;
             var targetField = GetField(targetFieldNumber);
 
-            Players[CurrentTurnPlayer] = targetField;
+            Players[CurrentTurnPlayer] = targetField.ValidateOutcome();
             playerCollection.NextPlayer();
         }
     }
